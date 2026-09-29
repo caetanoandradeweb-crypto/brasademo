@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BRASA Pizzaria — Forno a Lenha em Bragança Paulista</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --wine:#5C0F1E; --wine-deep:#380810; --ember:#DD6A2C; --ember-dark:#B84F1B;
+  --cream:#F7EFE0; --cream-soft:#EFE3C9; --ink:#211611; --charcoal:#2C2019;
+  --gold:#C79A52; --olive:#69754A; --line:rgba(33,22,17,.14); --white:#FFFBF3;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit; margin:0; padding:0;}
+html{scroll-behavior:smooth; scroll-padding-top:78px;}
+body{font-family:'Work Sans',system-ui,sans-serif; color:var(--ink); background:var(--cream); line-height:1.55; -webkit-font-smoothing:antialiased;}
+h1,h2,h3,.font-display{font-family:'Fraunces',Georgia,serif;}
+img,svg{max-width:100%; display:block;}
+a{color:inherit; text-decoration:none;}
+button{font:inherit; cursor:pointer; border:none; background:none; color:inherit;}
+ul{list-style:none;}
+.container{max-width:1180px; margin:0 auto; padding:0 24px;}
+.section{padding:clamp(56px,8vw,104px) 0;}
+.section-head{max-width:640px; margin-bottom:44px;}
+.eyebrow{font-family:'Fraunces',serif; font-style:italic; color:var(--ember-dark); font-size:1.05rem;}
+.section-title{font-size:clamp(1.9rem,3.4vw,2.7rem); font-weight:600; line-height:1.15; margin-top:6px;}
+.section-sub{margin-top:14px; font-size:1.05rem; color:var(--charcoal); opacity:.85; max-width:52ch;}
+.btn{display:inline-flex; align-items:center; gap:8px; padding:14px 28px; border-radius:3px; font-weight:600; font-size:.98rem; transition:transform .25s ease, box-shadow .25s ease, background .2s ease;}
+.btn:active{transform:scale(.97);}
+.btn-primary{background:var(--ember); color:var(--white);}
+.btn-primary:hover{background:var(--ember-dark); box-shadow:0 10px 24px -8px rgba(221,106,44,.55); transform:translateY(-2px);}
+.btn-outline{border:1.5px solid currentColor;}
+.btn-outline:hover{background:rgba(255,255,255,.08); transform:translateY(-2px);}
+.btn-light{background:var(--cream); color:var(--wine-deep);}
+.btn-light:hover{background:var(--white); transform:translateY(-2px);}
+:focus-visible{outline:2px solid var(--ember); outline-offset:3px;}
+
+/* reveal on scroll */
+.reveal{opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease;}
+.reveal.in{opacity:1; transform:translateY(0);}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+
+/* HEADER */
+.site-header{position:sticky; top:0; z-index:50; background:rgba(247,239,224,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); padding-top:env(safe-area-inset-top,0px);}
+.nav-row{display:flex; align-items:center; justify-content:space-between; height:76px;}
+.logo{font-family:'Fraunces',serif; font-weight:600; font-size:1.5rem; display:flex; align-items:baseline; gap:8px; color:var(--wine-deep);}
+.logo em{font-style:italic; font-weight:500; font-size:.7rem; color:var(--ember-dark); letter-spacing:.03em;}
+.nav-links{display:flex; align-items:center; gap:34px;}
+.nav-links a{font-weight:500; font-size:.96rem; position:relative; padding:6px 0;}
+.nav-links a::after{content:"";position:absolute; left:0; bottom:0; width:0; height:2px; background:var(--ember); transition:width .25s ease;}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{display:flex; align-items:center; gap:18px;}
+.hamburger{display:none; flex-direction:column; gap:5px; width:26px; z-index:60;}
+.hamburger span{height:2px; background:var(--ink); border-radius:2px; transition:transform .3s ease, opacity .3s ease;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* HERO */
+.hero{background:radial-gradient(120% 140% at 15% 0%,var(--wine) 0%,var(--wine-deep) 62%,#240509 100%); color:var(--cream); overflow:hidden; position:relative;}
+.hero-grid{display:grid; grid-template-columns:1fr; justify-items:center; text-align:center; gap:22px; max-width:760px; margin:0 auto; padding:clamp(64px,9vw,108px) 0 clamp(48px,7vw,80px);}
+.hero-tag{color:var(--gold); font-family:'Fraunces',serif; font-style:italic; font-size:1.15rem;}
+.hero h1{font-size:clamp(2.4rem,4.6vw,3.7rem); font-weight:600; line-height:1.08; margin:14px 0 20px;}
+.hero p{font-size:1.1rem; color:#EAD9C9; max-width:46ch; margin:0 auto 32px;}
+.hero-actions{display:flex; gap:16px; flex-wrap:wrap; justify-content:center;}
+
+/* DESTAQUES */
+.feature-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:28px;}
+.feature-card{padding:28px 22px; background:var(--white); border:1px solid var(--line); border-radius:4px; transition:transform .3s ease, box-shadow .3s ease;}
+.feature-card:hover{transform:translateY(-6px); box-shadow:0 20px 34px -18px rgba(33,22,17,.3);}
+.feature-card svg{width:34px; height:34px; color:var(--ember-dark); margin-bottom:16px;}
+.feature-card h3{font-size:1.08rem; font-weight:600; margin-bottom:8px; font-family:'Work Sans',sans-serif;}
+.feature-card p{font-size:.94rem; color:var(--charcoal); opacity:.85;}
+
+/* CARDAPIO */
+.cardapio{background:var(--cream-soft);}
+.menu-tabs{display:flex; gap:28px; border-bottom:1px solid var(--line); margin-bottom:8px; flex-wrap:wrap;}
+.menu-tab{padding:10px 2px 16px; font-weight:600; font-size:1rem; color:var(--charcoal); opacity:.55; border-bottom:2px solid transparent; transition:opacity .2s ease, border-color .2s ease;}
+.menu-tab:hover{opacity:.85;}
+.menu-tab.active{opacity:1; color:var(--wine-deep); border-color:var(--ember);}
+.menu-list{display:grid; grid-template-columns:1fr 1fr; gap:6px 48px; margin-top:28px;}
+.menu-item{padding:20px 0; border-bottom:1px dashed var(--line);}
+.menu-item-head{display:flex; align-items:baseline; gap:10px;}
+.menu-item-name{font-family:'Fraunces',serif; font-weight:600; font-size:1.14rem; white-space:nowrap;}
+.menu-item-leader{flex:1; border-bottom:2px dotted rgba(33,22,17,.3); transform:translateY(-5px);}
+.menu-item-price{font-weight:700; color:var(--ember-dark); white-space:nowrap; font-size:1.05rem;}
+.menu-item-desc{margin-top:6px; font-size:.92rem; color:var(--charcoal); opacity:.8; max-width:46ch;}
+
+/* DESTAQUE ESPECIAL */
+.destaque-esp{background:linear-gradient(120deg,var(--wine-deep),#4A0E1A 60%,var(--wine)); color:var(--cream);}
+.esp-grid{display:grid; grid-template-columns:1fr; justify-items:center; text-align:center;}
+.esp-card{max-width:560px; border:1px solid rgba(199,154,82,.45); border-radius:6px; padding:clamp(32px,5vw,48px) clamp(24px,5vw,44px);}
+.esp-tag{color:var(--gold); font-family:'Fraunces',serif; font-style:italic;}
+.esp-grid h2{font-size:clamp(1.9rem,3.2vw,2.6rem); margin:10px 0 16px;}
+.esp-price{font-size:2rem; font-family:'Fraunces',serif; color:var(--gold); margin:18px 0 24px;}
+
+/* SOBRE */
+.sobre-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:56px; align-items:start;}
+.sobre-grid p{margin-bottom:16px; color:var(--charcoal); font-size:1.02rem;}
+.pull-quote{background:var(--white); border-left:3px solid var(--ember); padding:26px 26px; font-family:'Fraunces',serif; font-style:italic; font-size:1.3rem; color:var(--wine-deep); border-radius:2px;}
+.pull-quote span{display:block; font-family:'Work Sans',sans-serif; font-style:normal; font-size:.85rem; margin-top:12px; opacity:.7;}
+
+/* AVALIACOES */
+.avaliacoes{background:var(--ink); color:var(--cream);}
+.avaliacoes .section-sub{color:#CBB9A8;}
+.review-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+.review-card{background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09); padding:26px; border-radius:4px; transition:transform .3s ease, background .3s ease;}
+.review-card:hover{transform:translateY(-5px); background:rgba(255,255,255,.08);}
+.stars{color:var(--gold); letter-spacing:2px; margin-bottom:12px; font-size:.95rem;}
+.review-card p.txt{font-size:.95rem; color:#E7DACC; margin-bottom:16px;}
+.review-name{font-weight:600; font-size:.94rem;}
+.review-role{font-size:.82rem; opacity:.6;}
+
+/* GALERIA */
+.galeria-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+.g-block{aspect-ratio:4/3; border-radius:4px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:10px; color:var(--white); font-weight:600; font-size:.95rem; position:relative; overflow:hidden; transition:transform .3s ease; padding:0 14px;}
+.g-block:hover{transform:scale(1.02);}
+.g-block svg{width:36px; height:36px;}
+.g1{background:linear-gradient(145deg,var(--wine),var(--wine-deep));}
+.g2{background:linear-gradient(145deg,var(--ember),var(--ember-dark));}
+.g3{background:linear-gradient(145deg,#7C5B2E,var(--gold));}
+.g4{background:linear-gradient(145deg,var(--olive),#4D5636);}
+.g5{background:linear-gradient(145deg,#8A2E1F,var(--wine-deep));}
+.g6{background:linear-gradient(145deg,var(--charcoal),var(--ink));}
+
+/* PROMOCAO */
+.promo{background:repeating-linear-gradient(135deg,var(--ember) 0 26px,var(--ember-dark) 26px 52px); color:var(--white); text-align:center; padding:clamp(50px,7vw,84px) 0;}
+.promo-inner{background:rgba(33,22,17,.72); backdrop-filter:blur(2px); max-width:680px; margin:0 auto; padding:44px 36px; border-radius:6px;}
+.promo-inner .eyebrow{color:var(--gold);}
+.promo-inner h2{font-size:clamp(1.7rem,3vw,2.3rem); margin:8px 0 14px;}
+.promo-inner p{opacity:.9; margin-bottom:26px;}
+
+/* CONTATO */
+.contato-grid{display:grid; grid-template-columns:.95fr 1.05fr; gap:56px;}
+.info-item{display:flex; gap:14px; margin-bottom:22px;}
+.info-item svg{width:22px; height:22px; color:var(--ember-dark); flex-shrink:0; margin-top:3px;}
+.info-item strong{display:block; font-size:.95rem;}
+.info-item span{font-size:.92rem; color:var(--charcoal); opacity:.85;}
+.mapa{margin-top:28px; border-radius:6px; overflow:hidden; border:1px solid var(--line); background:var(--white); position:relative; height:180px;}
+.mapa-grid{position:absolute; inset:0; background-image:repeating-linear-gradient(0deg,var(--line) 0 1px,transparent 1px 34px),repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px 34px);}
+.mapa-pin{position:absolute; top:50%; left:52%; transform:translate(-50%,-100%);}
+.mapa-pin svg{width:34px; height:34px; color:var(--wine);}
+.mapa-label{position:absolute; bottom:10px; left:12px; font-size:.72rem; color:var(--charcoal); opacity:.6; background:rgba(255,255,255,.8); padding:2px 8px; border-radius:20px;}
+.form{background:var(--white); border:1px solid var(--line); border-radius:6px; padding:32px;}
+.form-group{margin-bottom:18px;}
+.form-group label{display:block; font-size:.85rem; font-weight:600; margin-bottom:7px;}
+.form-group input,.form-group textarea{width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:3px; font:inherit; background:var(--cream);}
+.form-group input:focus,.form-group textarea:focus{outline:2px solid var(--ember); outline-offset:1px;}
+.form-note{font-size:.82rem; color:var(--charcoal); opacity:.65; margin-top:14px;}
+.form-success{display:none; background:#EFE9DA; border:1px solid var(--olive); color:var(--olive); padding:14px 16px; border-radius:4px; font-size:.9rem; margin-top:16px;}
+.form-success.show{display:block;}
+
+/* FOOTER */
+footer{background:var(--charcoal); color:#D9CBBB;}
+.footer-top{padding:64px 0 40px; display:grid; grid-template-columns:1.3fr 1fr 1fr 1fr; gap:36px;}
+.footer-brand .logo{color:var(--cream);}
+.footer-brand p{font-size:.92rem; margin-top:14px; opacity:.75; max-width:34ch;}
+.footer-col h4{font-size:.92rem; color:var(--cream); margin-bottom:16px; letter-spacing:.02em;}
+.footer-col li{margin-bottom:10px; font-size:.9rem;}
+.footer-col a:hover{color:var(--ember);}
+.social-row{display:flex; gap:12px; margin-top:18px;}
+.social-row a{width:36px; height:36px; border:1px solid rgba(255,255,255,.2); border-radius:50%; display:flex; align-items:center; justify-content:center; transition:background .2s ease, transform .2s ease;}
+.social-row a:hover{background:var(--ember); transform:translateY(-3px);}
+.social-row svg{width:16px; height:16px;}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1); padding:22px 0; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:.78rem; opacity:.65;}
+
+/* RESPONSIVE */
+@media (max-width:980px){
+  .hero-grid{grid-template-columns:1fr; text-align:center;}
+  .hero p{margin-left:auto;margin-right:auto;}
+  .hero-actions{justify-content:center;}
+  .feature-grid{grid-template-columns:repeat(2,1fr);}
+  .esp-grid{grid-template-columns:1fr; text-align:center;}
+  .esp-grid svg{order:-1;}
+  .sobre-grid{grid-template-columns:1fr;}
+  .review-grid{grid-template-columns:repeat(2,1fr);}
+  .galeria-grid{grid-template-columns:repeat(2,1fr);}
+  .contato-grid{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:680px){
+  .nav-links{position:fixed; inset:76px 0 0 0; background:var(--cream); flex-direction:column; justify-content:flex-start; align-items:center; padding-top:40px; gap:26px; transform:translateX(100%); transition:transform .35s ease; height:calc(100vh - 76px);}
+  .nav-links.open{transform:translateX(0);}
+  .nav-links a{font-size:1.15rem;}
+  .hamburger{display:flex;}
+  .nav-cta .btn-primary{display:none;}
+  .nav-links .btn-primary{display:inline-flex; margin-top:10px;}
+  .menu-list{grid-template-columns:1fr;}
+  .feature-grid{grid-template-columns:1fr;}
+  .review-grid{grid-template-columns:1fr;}
+  .galeria-grid{grid-template-columns:1fr 1fr;}
+  .footer-top{grid-template-columns:1fr; padding:48px 0 30px;}
+  .footer-bottom{flex-direction:column; text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav-row">
+    <a href="#inicio" class="logo">BRASA <em>pizzaria</em></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#inicio">Início</a>
+      <a href="#cardapio">Cardápio</a>
+      <a href="#sobre">Sobre nós</a>
+      <a href="#avaliacoes">Avaliações</a>
+      <a href="#contato">Contato</a>
+      <a href="#contato" class="btn btn-primary">Fazer pedido</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#contato" class="btn btn-primary">Fazer pedido</a>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="inicio">
+  <div class="container hero-grid">
+    <div>
+      <p class="hero-tag">Fogo, tempo e sabor.</p>
+      <h1>A pizza que só o fogo de verdade consegue fazer.</h1>
+      <p>Massa de fermentação natural por 48 horas, ingredientes escolhidos todos os dias e um forno a lenha que passa dos 400°C. Bragança Paulista tem um novo lugar para amar pizza.</p>
+      <div class="hero-actions">
+        <a href="#cardapio" class="btn btn-primary">Ver cardápio</a>
+        <a href="#contato" class="btn btn-outline">Fazer pedido</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="destaques">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Por que a BRASA</p>
+      <h2 class="section-title">Detalhes que sentimos falta em qualquer outra pizza.</h2>
+    </div>
+    <div class="feature-grid" id="featureGrid"></div>
+  </div>
+</section>
+
+<section class="section cardapio" id="cardapio">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Cardápio</p>
+      <h2 class="section-title">Feitas na hora, uma de cada vez.</h2>
+      <p class="section-sub">Massas, molhos e recheios preparados diariamente na nossa cozinha. Todas as pizzas saem no tamanho grande, 8 fatias.</p>
+    </div>
+    <div class="menu-tabs" id="menuTabs"></div>
+    <div class="menu-list" id="menuList"></div>
+  </div>
+</section>
+
+<section class="section destaque-esp">
+  <div class="container esp-grid">
+    <div class="esp-card">
+      <p class="eyebrow esp-tag">Pizza da casa</p>
+      <h2>Brasa Suprema</h2>
+      <p>Presunto parma fatiado na hora, rúcula selvagem, tomate seco confitado, lascas de parmesão curado e uma redução de balsâmico feita aqui na cozinha. A pizza que representa tudo o que acreditamos sobre sabor.</p>
+      <p class="esp-price">R$ 58,90</p>
+      <a href="#contato" class="btn btn-light">Quero experimentar</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sobre">
+  <div class="container sobre-grid">
+    <div class="reveal">
+      <p class="eyebrow">Nossa história</p>
+      <h2 class="section-title" style="margin-bottom:22px;">Um forno construído à mão, um sabor que não muda.</h2>
+      <p>A BRASA nasceu em 2016, quando trocamos o forno elétrico por um forno de tijolos refratários, erguido à mão num fim de semana inteiro. A ideia era simples: fazer a pizza que a gente mesmo gostaria de comer todos os dias — massa leve, ingredientes de verdade e aquele sabor de fogo que só a lenha dá.</p>
+      <p>Hoje, quase dez anos depois, o forno continua o mesmo. A massa ainda descansa 48 horas antes de virar pizza, e cada fornada sai da nossa cozinha em Bragança Paulista com o mesmo cuidado do primeiro dia — feita por gente que gosta mesmo do que faz.</p>
+    </div>
+    <div class="pull-quote reveal">“Pizza boa não tem pressa. A nossa espera dois dias antes de chegar até você.”<span>— Equipe BRASA</span></div>
+  </div>
+</section>
+
+<section class="section avaliacoes" id="avaliacoes">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow" style="color:var(--gold)">Avaliações</p>
+      <h2 class="section-title">O que dizem sobre a BRASA</h2>
+      <p class="section-sub">Depoimentos fictícios, criados para fins de demonstração deste projeto.</p>
+    </div>
+    <div class="review-grid" id="reviewGrid"></div>
+  </div>
+</section>
+
+<section class="section" id="galeria">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Galeria</p>
+      <h2 class="section-title">Do forno até a mesa</h2>
+    </div>
+    <div class="galeria-grid" id="galeriaGrid"></div>
+  </div>
+</section>
+
+<section class="promo">
+  <div class="container">
+    <div class="promo-inner reveal">
+      <p class="eyebrow">Toda terça-feira</p>
+      <h2>Noite da Brasa</h2>
+      <p>2 pizzas grandes (sabores à escolha) + refrigerante 2L por apenas R$ 89,90. Válido para consumo no salão e para delivery.</p>
+      <a href="#contato" class="btn btn-light">Garantir na terça</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contato">
+  <div class="container contato-grid">
+    <div class="reveal">
+      <p class="eyebrow">Contato</p>
+      <h2 class="section-title" style="margin-bottom:26px;">Vamos preparar a sua pizza</h2>
+      <div class="info-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><div><strong>Endereço</strong><span>Centro de Bragança Paulista — SP</span></div></div>
+      <div class="info-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5c0-1 1-2 2-2h3l2 5-2 1.5a11 11 0 0 0 5.5 5.5L15 13l5 2v3c0 1-1 2-2 2C10 20 3 13 3 5z"/></svg><div><strong>Telefone / WhatsApp</strong><span>(00) 0000-0000</span></div></div>
+      <div class="info-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><div><strong>Horário de funcionamento</strong><span>Terça a domingo, das 18h às 23h30 · Segundas fechado</span></div></div>
+      <div class="info-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg><div><strong>Instagram</strong><span>@brasa.pizzaria</span></div></div>
+      <div class="mapa" role="img" aria-label="Mapa ilustrativo da localização fictícia da BRASA Pizzaria">
+        <div class="mapa-grid"></div>
+        <div class="mapa-pin"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"/></svg></div>
+        <span class="mapa-label">Mapa ilustrativo</span>
+      </div>
+    </div>
+    <form class="form reveal" id="orderForm">
+      <div class="form-group"><label for="fName">Nome</label><input id="fName" required placeholder="Seu nome completo"></div>
+      <div class="form-group"><label for="fPhone">Telefone</label><input id="fPhone" required placeholder="(11) 90000-0000"></div>
+      <div class="form-group"><label for="fMsg">Pedido ou mensagem</label><textarea id="fMsg" rows="4" required placeholder="Ex: 1 Brasa Suprema e 1 suco de laranja, para entrega."></textarea></div>
+      <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Enviar pedido</button>
+      <p class="form-note">Formulário de demonstração — os pedidos reais da BRASA são feitos por telefone ou WhatsApp.</p>
+      <div class="form-success" id="formSuccess">Pedido recebido! Nossa equipe entraria em contato em instantes. 🍕</div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-top">
+    <div class="footer-brand">
+      <a href="#inicio" class="logo">BRASA <em>pizzaria</em></a>
+      <p>Pizza de forno a lenha, massa de fermentação natural e ingredientes selecionados todos os dias, em Bragança Paulista.</p>
+      <div class="social-row">
+        <a href="https://instagram.com" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></a>
+        <a href="#contato" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5c0-1 1-2 2-2h3l2 5-2 1.5a11 11 0 0 0 5.5 5.5L15 13l5 2v3c0 1-1 2-2 2C10 20 3 13 3 5z"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Links rápidos</h4>
+      <ul><li><a href="#inicio">Início</a></li><li><a href="#cardapio">Cardápio</a></li><li><a href="#sobre">Sobre nós</a></li><li><a href="#avaliacoes">Avaliações</a></li><li><a href="#contato">Contato</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <ul><li>(00) 0000-0000</li><li>@brasa.pizzaria</li><li>Bragança Paulista — SP</li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>Horário</h4>
+      <ul><li>Terça a domingo</li><li>18h às 23h30</li><li>Segundas fechado</li></ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 BRASA Pizzaria. Todos os direitos reservados.</span>
+    <span>Site demonstrativo desenvolvido por CwebA — nomes, avaliações e dados de contato são fictícios.</span>
+  </div>
+</footer>
+
+<script>
+const FEATURES=[
+  {icon:'<path d="M12 7v5l3 2"/><circle cx="12" cy="12" r="9"/>',title:'Fermentação de 48h',desc:'Nossa massa descansa dois dias inteiros, ganhando leveza e sabor que massa rápida não alcança.'},
+  {icon:'<path d="M12 3c2 3-1 4-1 6a3 3 0 1 0 6 0c0-1-1-2-1-2 2 1 3 4 3 6a7 7 0 1 1-14 0c0-4 3-6 7-10z"/>',title:'Forno a lenha',desc:'Construído com tijolos refratários, passa dos 400°C e assa cada pizza em menos de 3 minutos.'},
+  {icon:'<path d="M4 8c2-3 5-4 8-4s6 1 8 4M4 8l1 9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2l1-9M4 8h16"/>',title:'Ingredientes selecionados',desc:'Compramos direto de produtores da região e escolhemos cada item como se fosse para nossa mesa.'},
+  {icon:'<rect x="2" y="8" width="13" height="8" rx="1"/><path d="M15 11h4l3 3v2h-7z"/><circle cx="6.5" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/>',title:'Entrega rápida',desc:'Rota otimizada e equipe própria: sua pizza sai quente do forno e chega quente na sua porta.'},
+];
+document.getElementById('featureGrid').innerHTML=FEATURES.map(f=>`<div class="feature-card reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">${f.icon}</svg><h3>${f.title}</h3><p>${f.desc}</p></div>`).join('');
+
+const MENU=[
+ {cat:'tradicionais',name:'Margherita Clássica',desc:'Molho de tomate italiano, mussarela fresca, manjericão e fio de azeite extravirgem.',price:42.90},
+ {cat:'tradicionais',name:'Calabresa na Brasa',desc:'Calabresa artesanal defumada na casa, cebola roxa, azeitonas pretas e orégano.',price:46.90},
+ {cat:'tradicionais',name:'Quatro Queijos',desc:'Mussarela, provolone, gorgonzola e parmesão curado por 12 meses.',price:49.90},
+ {cat:'tradicionais',name:'Frango com Catupiry',desc:'Frango desfiado ao molho de ervas, catupiry original e milho doce.',price:45.90},
+ {cat:'especiais',name:'Brasa Suprema',desc:'Presunto parma, rúcula selvagem, tomate seco, parmesão curado e redução de balsâmico.',price:58.90},
+ {cat:'especiais',name:'Portuguesa da Casa',desc:'Presunto, ovos caipiras, ervilha fresca, cebola e azeitona.',price:47.90},
+ {cat:'especiais',name:'Burrata & Tomate Confitado',desc:'Burrata fresca, tomates confitados lentamente e pesto de manjericão.',price:54.90},
+ {cat:'especiais',name:'Costela na Brasa',desc:'Costela bovina desfiada por 8 horas, cebola caramelizada e barbecue defumado.',price:56.90},
+ {cat:'doces',name:'Chocolate Belga com Morango',desc:'Chocolate belga derretido, morangos frescos e açúcar de confeiteiro.',price:38.90},
+ {cat:'doces',name:'Banana Caramelizada',desc:'Banana caramelizada na manteiga, canela, leite condensado e granulado.',price:34.90},
+ {cat:'bebidas',name:'Refrigerante lata 350ml',desc:'Coca-Cola, Guaraná ou Sprite geladinhos.',price:6.50},
+ {cat:'bebidas',name:'Suco natural 400ml',desc:'Laranja, limão ou maracujá, feitos na hora.',price:9.90},
+ {cat:'bebidas',name:'Água mineral 500ml',desc:'Com ou sem gás.',price:5.00},
+ {cat:'bebidas',name:'Cerveja artesanal IPA',desc:'Produção local, aroma cítrico e final seco. 355ml.',price:16.90},
+];
+const CATS=[['tradicionais','Tradicionais'],['especiais','Especiais'],['doces','Doces'],['bebidas','Bebidas']];
+const tabsEl=document.getElementById('menuTabs'), listEl=document.getElementById('menuList');
+function fmt(p){return 'R$ '+p.toFixed(2).replace('.',',');}
+function renderMenu(cat){
+  tabsEl.innerHTML=CATS.map(([id,label])=>`<button class="menu-tab${id===cat?' active':''}" data-cat="${id}">${label}</button>`).join('');
+  listEl.innerHTML=MENU.filter(m=>m.cat===cat).map(m=>`<div class="menu-item reveal in"><div class="menu-item-head"><span class="menu-item-name">${m.name}</span><span class="menu-item-leader"></span><span class="menu-item-price">${fmt(m.price)}</span></div><p class="menu-item-desc">${m.desc}</p></div>`).join('');
+  tabsEl.querySelectorAll('.menu-tab').forEach(b=>b.addEventListener('click',()=>renderMenu(b.dataset.cat)));
+}
+renderMenu('tradicionais');
+
+const REVIEWS=[
+ {name:'Mariana Alves',role:'Cliente desde 2019',rating:5,text:'A massa é diferente de tudo que já comi na região. Fina, leve e com aquele gostinho de forno a lenha de verdade. Virou tradição de sexta-feira aqui em casa.'},
+ {name:'Rodrigo Teixeira',role:'Pedido via delivery',rating:5,text:'Pedi pelo WhatsApp e em 35 minutos a pizza já estava na porta, quentinha. A Costela na Brasa é surreal.'},
+ {name:'Camila Duarte',role:'Jantar em família',rating:4,text:'Ambiente muito aconchegante para jantar em família. Só senti falta de mais opções sem glúten, mas a comida é excelente.'},
+ {name:'Eduardo Lima',role:'Cliente frequente',rating:5,text:'A Brasa Suprema virou minha pizza favorita da cidade. Ingredientes de qualidade e atendimento sempre atencioso.'},
+ {name:'Beatriz Nogueira',role:'Comemorações',rating:5,text:'Fazemos aniversário aqui todo ano. A equipe sempre capricha e a Quatro Queijos é impossível de resistir.'},
+];
+document.getElementById('reviewGrid').innerHTML=REVIEWS.map(r=>`<div class="review-card reveal"><div class="stars">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div><p class="txt">"${r.text}"</p><div class="review-name">${r.name}</div><div class="review-role">${r.role}</div></div>`).join('');
+
+const GALERIA=[
+ {cls:'g1',label:'Massa fresca',icon:'<circle cx="12" cy="12" r="8"/>'},
+ {cls:'g2',label:'Forno a lenha',icon:'<path d="M12 3c2 3-1 4-1 6a3 3 0 1 0 6 0c0-1-1-2-1-2 2 1 3 4 3 6a7 7 0 1 1-14 0c0-4 3-6 7-10z"/>'},
+ {cls:'g3',label:'Preparo artesanal',icon:'<path d="M4 21l7-7M14 10l7-7M9 9l6 6M4 21l4-1 10-10-3-3L5 17z"/>'},
+ {cls:'g4',label:'Ingredientes selecionados',icon:'<path d="M12 3c4 2 7 5 7 9a7 7 0 1 1-14 0c0-4 3-7 7-9z"/>'},
+ {cls:'g5',label:'Salão e ambiente',icon:'<rect x="3" y="10" width="18" height="9" rx="1"/><path d="M3 10l9-6 9 6"/>'},
+ {cls:'g6',label:'Pizza pronta',icon:'<circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1.4" fill="currentColor"/><circle cx="14" cy="9" r="1.4" fill="currentColor"/><circle cx="15" cy="14" r="1.4" fill="currentColor"/>'},
+];
+document.getElementById('galeriaGrid').innerHTML=GALERIA.map(g=>`<div class="g-block ${g.cls} reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">${g.icon}</svg><span>${g.label}</span></div>`).join('');
+
+/* mobile menu */
+const hamburger=document.getElementById('hamburger'), navLinks=document.getElementById('navLinks');
+hamburger.addEventListener('click',()=>{
+  const open=navLinks.classList.toggle('open');
+  hamburger.classList.toggle('open',open);
+  hamburger.setAttribute('aria-expanded',open);
+});
+navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{navLinks.classList.remove('open');hamburger.classList.remove('open');}));
+
+/* scroll reveal */
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* form */
+document.getElementById('orderForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  document.getElementById('formSuccess').classList.add('show');
+  this.reset();
+});
+</script>
+</body>
+</html>
